@@ -78,9 +78,38 @@ namespace NavBarDemo
             get { return Top - Margin.Top - Padding.Top; }
         }
 
-        private int ValideBottom
+        private int ValidBottom
         {
             get { return Bottom - Margin.Bottom - Padding.Bottom; }
+        }
+
+        public void SetExpandHeight()
+        {
+            int height = this.Height;
+            if (_selectedIndex >= 0 && _selectedIndex < this._navBarItems.Count)
+            {
+                if (_selectedIndex == 0)
+                {
+                    if (this._navBarItems.Count == 1)
+                    {
+                        height = this.ValidBottom - this._navBarItems[_selectedIndex].Top - this._barSpace;
+                    }
+                    else
+                    {
+                        height = this._navBarItems[_selectedIndex + 1].Top - this._navBarItems[_selectedIndex].Top - this._barSpace;
+                    }
+                }
+                else if (_selectedIndex == this._navBarItems.Count - 1)
+                {
+                    this._navBarItems[_selectedIndex].Height = this.ValidBottom - this._navBarItems[_selectedIndex - 1].Bottom - this._barSpace;
+                }
+                else
+                {
+                    this._navBarItems[_selectedIndex].Height = this._navBarItems[_selectedIndex + 1].Top - this._navBarItems[_selectedIndex - 1].Bottom - this._barSpace;
+                }
+
+                this._navBarItems[_selectedIndex].Height = height;
+            }
         }
 
         public void SetLayout()
@@ -109,7 +138,7 @@ namespace NavBarDemo
                 {
                     if (i == this._navBarItems.Count - 1)
                     {
-                        this._navBarItems[i].Top = this.ValideBottom - this._navBarItems[i].Height - this._barSpace;
+                        this._navBarItems[i].Top = this.ValidBottom - this._navBarItems[i].Height - this._barSpace;
                     }
                     else
                     {

@@ -52,6 +52,7 @@ namespace NavBarDemo
             else
             { 
                 //TODO: calc the bar height
+                _owner.SetExpandHeight();
             }
             _owner.SetLayout();
         }
@@ -148,6 +149,11 @@ namespace NavBarDemo
             root.Text = "Root";
             root.Expand();
 
+            TreeNode root2 = new TreeNode();
+            root2.Text = "Root2";
+            root2.Expand();
+
+
             TreeNode node1 = new TreeNode();
             node1.Text = "1";
             node1.Expand();
@@ -159,9 +165,21 @@ namespace NavBarDemo
             root.Nodes.Add(node1);
             root.Nodes.Add(node2);
 
+            TreeNode node3 = new TreeNode();
+            node3.Text = "1";
+            node3.Expand();
+
+            TreeNode node4 = new TreeNode();
+            node4.Text = "2";
+            node4.Expand();
+
+            root2.Nodes.Add(node3);
+            root2.Nodes.Add(node4);
+
             //_treeView.Nodes.Add(holder);
             _treeView.Top = _button.Bottom + _barSpace;
             _treeView.Nodes.Add(root);
+            _treeView.Nodes.Add(root2);
         }
 
         protected override void OnClick(EventArgs e)
